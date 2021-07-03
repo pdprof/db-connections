@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 public class DBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name="jdbc/derbyEmbedded", shareable=true)
+	@Resource(name = "jdbc/derbyEmbedded", shareable = true)
 	DataSource ds;
 
 	String tableName = "EMPLOYEE";
@@ -47,7 +47,6 @@ public class DBServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			Connection con = null;
-			String mode = request.getParameter("mode");
 			String action = request.getParameter("action");
 			String name = request.getParameter("name");
 			String idStr = request.getParameter("id");
@@ -55,6 +54,14 @@ public class DBServlet extends HttpServlet {
 			con = ds.getConnection();
 
 			String result = null;
+			int id = Integer.MAX_VALUE;
+			try {
+				if (idStr != null) {
+					id = Integer.parseInt(idStr);
+				}
+			} catch (NumberFormatException e) {
+				result = "Update is failed with NumberFormatException of num:" + idStr;
+			}
 
 			if (tableExists(con)) {
 				if (action != null) {
@@ -65,13 +72,13 @@ public class DBServlet extends HttpServlet {
 					} else if (action.equalsIgnoreCase("insert")) {
 						insert(con, name);
 						result = "Name:" + name + " is inserted into " + tableName;
-					} else if (action.equalsIgnoreCase("update")) {
-						try {
-							int id = Integer.parseInt(idStr);
+					} else if (id != Integer.MAX_VALUE) {
+						if(action.equalsIgnoreCase("update")) {
 							update(con, id, name);
 							result = "Id:" + id + " is updated with Name:" + name + " at " + tableName;
-						} catch (NumberFormatException e) {
-							result = "Update is failed with NumberFormatException of num:" + idStr;
+						} else if (action.equalsIgnoreCase("delete")) {
+							delete(con, id);
+							result = "Id:" + id + " is deleted from " + tableName;
 						}
 					}
 				}
@@ -123,13 +130,19 @@ public class DBServlet extends HttpServlet {
 
 	private int insert(Connection con, String name) throws SQLException {
 		PreparedStatement pstmt = con.prepareStatement("insert into EMPLOYEE (name) VALUES (?)");
-		pstmt.setString(0, name);
+		pstmt.setString(1, name);
 		return pstmt.executeUpdate();
 	}
 
 	private int update(Connection con, int id, String name) throws SQLException {
 		PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEE SET name = ? WHERE ID = ?");
-		pstmt.setString(0, name);
+		pstmt.setString(1, name);
+		pstmt.setInt(2, id);
+		return pstmt.executeUpdate();
+	}
+	
+	private int delete(Connection con, int id) throws SQLException {
+		PreparedStatement pstmt = con.prepareStatement("DELETE FROM EMPLOYEE WHERE ID = ?");
 		pstmt.setInt(1, id);
 		return pstmt.executeUpdate();
 	}
@@ -137,7 +150,7 @@ public class DBServlet extends HttpServlet {
 	private LinkedHashMap<String, Employee> select(Connection con) throws SQLException {
 		LinkedHashMap<String, Employee> map = new LinkedHashMap<String, Employee>();
 		ResultSet rs = con.createStatement().executeQuery("select id,name from EMPLOYEE");
-		while(rs.next()) {
+		while (rs.next()) {
 			String id = rs.getString("id");
 			String name = rs.getString("name");
 			Employee emp = new Employee(id, name);
