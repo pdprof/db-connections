@@ -1,0 +1,2 @@
+-Djava.library.path=/config/libs
+-Xdump:directory=/pdprof/dump
