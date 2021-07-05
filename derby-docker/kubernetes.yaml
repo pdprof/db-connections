@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-sessions-deployment
+  labels:
+    app: db-sessions
+spec:
+  selector:
+    matchLabels:
+      app: db-sessions
+  template:
+    metadata:
+      labels:
+        app: db-sessions
+    spec:
+      containers:
+      - name: pdpro-container
+        image: image-registry.openshift-image-registry.svc:5000/[project-name]/db.sessions:[build-date]
+        ports:
+        - containerPort: 9080
+      imagePullSecrets:
+      - name: docker-user-secret
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-sessions-service
+spec:
+  selector:
+    app: db-sessions
+  ports:
+  - protocol: TCP
+    port: 9080
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: db-sessions-route
+spec:
+  to:
+    kind: Service
+    name: db-sessions-service
