@@ -50,6 +50,7 @@ public class DBServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			String name = request.getParameter("name");
 			String idStr = request.getParameter("id");
+			String timeoutStr = request.getParameter("timeout");
 
 			con = ds.getConnection();
 
@@ -91,6 +92,15 @@ public class DBServlet extends HttpServlet {
 			LinkedHashMap<String, Employee> employee = select(con);
 			request.setAttribute("employee", employee);
 			
+			
+			try {
+				int timeout = 0;
+				if (timeoutStr != null) {
+					timeout = Integer.parseInt(timeoutStr);
+				}
+				Thread.sleep(timeout);
+			} catch (Exception e) { } 
+
 	        RequestDispatcher dispatcher =  request.getRequestDispatcher("employee.jsp");
 	        dispatcher.forward(request, response);
 
