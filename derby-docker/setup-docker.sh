@@ -7,4 +7,4 @@ if [ ! -f trapit ]; then
      exit 1
 fi
 chmod 755 trapit
-docker build -t db.sessions .
+docker build -t db-connections .

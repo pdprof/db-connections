@@ -21,11 +21,11 @@ docker login `oc registry info`
 BUILD_DATE=`date +%Y%m%d`
 docker pull openliberty/open-liberty:kernel-java8-openj9-ubi
 
-docker build -t db.sessions:${BUILD_DATE} .
+docker build -t db-connections:${BUILD_DATE} .
 
-docker tag db.sessions:${BUILD_DATE} $(oc registry info)/$(oc project -q)/db.sessions:${BUILD_DATE}
+docker tag db-connections:${BUILD_DATE} $(oc registry info)/$(oc project -q)/db-connections:${BUILD_DATE}
 
-docker push $(oc registry info)/$(oc project -q)/db.sessions:${BUILD_DATE}
+docker push $(oc registry info)/$(oc project -q)/db-connections:${BUILD_DATE}
 
 sed -i s/image-registry.openshift-image-registry.svc:5000/default-route-openshift-image-registry.apps-crc.testing/g kubernetes.yaml
 sed -i s/"\[project-name\]"/$(oc project -q)/g kubernetes.yaml

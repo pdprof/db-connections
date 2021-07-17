@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db-sessions-deployment
+  name: db-connections-deployment
   labels:
-    app: db-sessions
+    app: db-connections
 spec:
   selector:
     matchLabels:
-      app: db-sessions
+      app: db-connections
   template:
     metadata:
       labels:
-        app: db-sessions
+        app: db-connections
     spec:
       containers:
       - name: pdpro-container
-        image: image-registry.openshift-image-registry.svc:5000/[project-name]/db.sessions:[build-date]
+        image: image-registry.openshift-image-registry.svc:5000/[project-name]/db-connections:[build-date]
         ports:
         - containerPort: 9080
       imagePullSecrets:
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-sessions-service
+  name: db-connections-service
 spec:
   selector:
-    app: db-sessions
+    app: db-connections
   ports:
   - protocol: TCP
     port: 9080
@@ -35,8 +35,8 @@ spec:
 apiVersion: v1
 kind: Route
 metadata:
-  name: db-sessions-route
+  name: db-connections-route
 spec:
   to:
     kind: Service
-    name: db-sessions-service
+    name: db-connections-service
