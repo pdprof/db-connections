@@ -1,4 +1,4 @@
-# MustGather Hands-On Sessions Case
+# MustGather Hands-On DB Connections case
 
 ## Start db-connections container on docker or openshift
 
@@ -26,7 +26,7 @@ Access to following URL by your browser
 
 ![script](script.png)
 
-Please us populate button to get scripts with your expected options
+Please use populate button to get scripts with your expected options
 
 Script example
 ```
