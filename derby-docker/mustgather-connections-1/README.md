@@ -24,7 +24,7 @@ Access to following URL by your browser
 
 - http://localhost:9080/db.connections/script
 
-![script][script.png]
+![script](script.png)
 
 Please us populate button to get scripts with your expected options
 
