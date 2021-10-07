@@ -15,7 +15,7 @@ setup-docker.sh
 ### Start docker 
 ```
 mkdir ~/pdprof
-docker run --rm -p 9080:9080 -v ~/pdprof:/pdprof db-connections
+docker run --rm -p 9443:9443 -p 9080:9080 -v ~/pdprof:/pdprof db-connections
 ```
 
 Now you can access http://localhost:9080/db.connections
