@@ -22,7 +22,7 @@ USER root
 # net-tools is for netstat (in inperf.sh)
 # gdb is for gcore
 RUN dnf install -y make procps-ng net-tools gdb
-ADD --chown=1001:0 https://www.ibm.com/support/pages/system/files/inline-files/\$FILE/linperf.sh /config/
+ADD --chown=1001:0 https://www.ibm.com/support/pages/system/files/inline-files/linperf.sh /config/
 ADD --chown=1001:0 https://ftp.riken.jp/net/apache/db/derby/db-derby-10.14.2.0/db-derby-10.14.2.0-bin.tar.gz /output/resources/
 RUN mkdir -p /pdprof/dump \
     && chown -R 1001:0 /pdprof && chmod 755 /config/linperf.sh \

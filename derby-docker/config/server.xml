@@ -18,7 +18,7 @@
     <requestTiming slowRequestThreshold="5s" hungRequestThreshold="10m">
     </requestTiming>
 
-    <logging  traceSpecification="com.ibm.ws.session.*=all:com.ibm.ws.webcontainer*=all:com.ibm.wsspi.webcontainer*=all:RRA=all:WAS.j2c=all:com.ibm.ws.jdbc.*=all:Transaction=all:ConnLeakLogic=all"
+    <logging  traceSpecification="com.ibm.ws.session.*=all:com.ibm.ws.webcontainer*=all:com.ibm.wsspi.webcontainer*=all:RRA=all:WAS.j2c=all:com.ibm.ws.jdbc.*=all:Transaction=all:ConnLeakLogic=all:jmx.rest.server.connector=all:com.ibm.ws.jmx.connector.server.rest.*=all"
       traceFileName="trace.log"
       maxFileSize="20"
       maxFiles="10"
