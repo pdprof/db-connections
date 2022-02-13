@@ -50,7 +50,7 @@
 
     <dataSource id="DefaultDetaSource" jdbcDriverRef="DerbyDriver" jndiName="jdbc/derbyEmbedded" type="javax.sql.DataSource">
 	<connectionManager maxPoolSize="5" minPoolSize="2"/>
-	<properties.derby.embedded createDatabase="create" databaseName="pdprof/databases/SAMPLEDB"/>
+	<properties.derby.embedded createDatabase="create" databaseName="/pdprof/databases/SAMPLEDB"/>
     </dataSource>
 
     <webApplication id="db.connections" location="db.connections.war" name="db.connections"/>

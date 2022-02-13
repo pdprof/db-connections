@@ -1,0 +1,56 @@
+<server description="new server">
+
+	<!-- Enable features -->
+    <featureManager>
+	<feature>webProfile-8.0</feature>
+	<feature>localConnector-1.0</feature>
+	<feature>sessionDatabase-1.0</feature>
+        <feature>eventLogging-1.0</feature>
+        <feature>requestTiming-1.0</feature>
+	<feature>restConnector-2.0</feature>
+    </featureManager>
+
+    <httpAccessLogging id="pdprofAccessLogging" logFormat="%h %u %t &quot;%r&quot; %s %b %{remote}p %D %{JSESSIONID}C %{Set-Cookie}o"/>
+    <httpEndpoint accessLoggingRef="pdprofAccessLogging" host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+    <eventLogging logMode="entryExit" minDuration="1ms"/>
+
+    <requestTiming slowRequestThreshold="5s" hungRequestThreshold="10m">
+    </requestTiming>
+
+    <logging  traceSpecification="com.ibm.ws.session.*=all:com.ibm.ws.webcontainer*=all:com.ibm.wsspi.webcontainer*=all:RRA=all:WAS.j2c=all:com.ibm.ws.jdbc.*=all:Transaction=all:ConnLeakLogic=all:jmx.rest.server.connector=all:com.ibm.ws.jmx.connector.server.rest.*=all"
+      traceFileName="trace.log"
+      maxFileSize="20"
+      maxFiles="10"
+      traceFormat="BASIC" />
+
+   <basicRegistry id="basic">
+      <user name="wsadmin" password="passw0rd" />
+      <user name="reader" password="passw0rd" />
+   </basicRegistry>
+   <administrator-role>
+      <user>wsadmin</user>
+   </administrator-role>
+   <reader-role>
+      <user>reader</user>
+   </reader-role>
+
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <fileset dir="/output/resources/db2" id="Db2Files" includes="*.jar"/>
+    <library filesetRef="Db2Files" id="Db2Lib"/>
+    <jdbcDriver id="Db2Driver" libraryRef="Db2Lib"/>
+    <!-- jndiName derby is from original application which is developed with derby. -->
+    <dataSource id="PdprofDataSource" jdbcDriverRef="Db2Driver" jndiName="jdbc/derbyEmbedded" type="javax.sql.DataSource">
+        <connectionManager maxPoolSize="5" minPoolSize="2"/>
+        <properties.db2.jcc databaseName="PDPROF" 
+                      serverName="localhost" portNumber="50000"
+                      user="db2inst1" password="passw0rd"/>
+    </dataSource>
+
+    <httpSessionDatabase dataSourceRef="PdprofDataSource" id="SessionDB"/>
+    <httpSession cloneId="${env.HOSTNAME}" storageRef="SessionDB"/>
+
+    <webApplication id="db.connections" location="db.connections.war" name="db.connections"/>
+</server>
