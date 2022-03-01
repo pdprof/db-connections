@@ -7,6 +7,7 @@
 #     exit 1
 #fi
 #chmod 755 trapit
+DOCKER_HOST=172.17.0.1
 
 # Setup for derby
 cp config/server.xml.derby config/server.xml
@@ -18,6 +19,6 @@ docker build -t mydb2 -f Dockerfile.db2 .
 ./db2-start.sh
 sleep 10
 docker cp mydb2:/opt/ibm/db2/V11.5/java/db2jcc4.jar lib/
-cp config/server.xml.db2 config/server.xml
+sed s/localhost/$DOCKER_HOST/g config/server.xml.db2 > config/server.xml
 docker build -t db2-connections -f Dockerfile.ds-db2 .
 rm config/server.xml
