@@ -12,13 +12,22 @@
 setup-docker.sh
 ```
 
-### Start docker 
+### Start docker for Derby database
 ```
 mkdir ~/pdprof
 docker run --rm -p 9443:9443 -p 9080:9080 -v ~/pdprof:/pdprof db-connections
 ```
 
-Now you can access http://localhost:9080/db.connections
+Now you can access to http://localhost:9080/db.connections
+
+
+### Start docker for Db2 database
+```
+./db2-start.sh
+./ds-db2-start.sh
+```
+
+Now you can access to http://localhost:9080/db.connections
 
 
 ## Test on OpenShift
