@@ -1,0 +1,30 @@
+{
+  "value": "PoolManager@6a30b7c5
+name=WebSphere:type=com.ibm.ws.jca.cm.mbean.ConnectionManagerMBean,jndiName=jdbc/derbyEmbedded,name=dataSource[DefaultDetaSource]/connectionManager[default-0]
+jndiName=jdbc/derbyEmbedded
+maxPoolSize=5
+size=2
+waiting=0
+unshared=0
+shared=0
+available=2
+ ManagedConnection@2b3cc6e5=Reusable
+ ManagedConnection@41354f7c=Reusable
+
+Extended ConnLeakLogic information
+JNDI name:jdbc/derbyEmbedded
+PoolManager object:-112548363
+Total number of connections: 2 (max/min 5/2, reap/unused/aged 180/1800/-1, connectiontimeout/purge 30/EntirePool)
+Shared Connection information (shared partitions 200)
+  No shared connections
+
+Free Connection information (free distribution table 100)
+  (1)MCWrapper id 2b3cc6e5  Managed connection WSRdbManagedConnectionImpl@4e5d5734  State:STATE_ACTIVE_FREE
+  (1)MCWrapper id 41354f7c  Managed connection WSRdbManagedConnectionImpl@d5655cc3  State:STATE_ACTIVE_FREE
+
+  Total number of connection in free pool: 2
+UnShared Connection information
+  No unshared connections
+",
+  "type": "java.lang.String"
+}
