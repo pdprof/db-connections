@@ -25,3 +25,13 @@ docker cp mydb2:/opt/ibm/db2/V11.5/java/db2jcc4.jar lib/
 sed s/localhost/$DOCKER_HOST/g config/server.xml.db2 > config/server.xml
 docker build -t db2-connections -f Dockerfile.ds-db2 .
 rm config/server.xml
+
+# Setup fo mysql
+docker network create pdprof-network
+docker build -t mysqldb -f Dockerfile.mysql .
+mkdir mysqldata
+chown 1000:1000 mysqldata
+sleep 10
+cp config/server.xml.mysql config/server.xml
+docker build -t mysql-connections -f Dockerfile.ds-mysql .
+rm config/server.xml
