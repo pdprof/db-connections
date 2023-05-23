@@ -45,7 +45,7 @@
     <dataSource id="PdprofDataSource" jdbcDriverRef="MySQLDriver" jndiName="jdbc/derbyEmbedded" type="javax.sql.DataSource">
         <connectionManager maxPoolSize="5" minPoolSize="2"/>
         <properties databaseName="PDPROF" 
-                      serverName="mysqldb" portNumber="3306"
+                      serverName="localhost" portNumber="3306"
                       user="root" password="passw0rd"/>
     </dataSource>
 
