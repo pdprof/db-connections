@@ -30,8 +30,6 @@ rm config/server.xml
 
 # Setup fo mysql
 docker build -t mysqldb -f Dockerfile.mysql .
-mkdir mysqldata
-chown 1000:1000 mysqldata
 sleep 10
 sed s/localhost/$ACCESS_HOST/g config/server.xml.mysql > config/server.xml
 docker build -t mysql-connections -f Dockerfile.ds-mysql .
