@@ -48,6 +48,8 @@ Get mbeans list and find ConnectionManagerMBean.
 - https://localhost:9443/IBMJMXConnectorREST/mbeans
 
 ```
+./getMBeans.sh
+
 {"objectName":"WebSphere:type=com.ibm.ws.jca.cm.mbean.ConnectionManagerMBean,jndiName=jdbc/derbyEmbedded,name=dataSource[DefaultDetaSource]/connectionManager[default-0]","className":"com.ibm.ws.jca.cm.mbean.ConnectionManagerMBean","URL":"/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean"}
 ```
 
@@ -56,24 +58,89 @@ Get MBean information.
 - https://localhost:9443/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean
 
 ```
-{"className":"com.ibm.ws.jca.cm.mbean.ConnectionManagerMBean","description":"MBean for a Connection Manager","descriptor":{"names":[],"values":[]},"attributes":[],"attributes_URL":"/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/attributes","constructors":[],"notifications":[],"operations":[{"name":"purgePoolContents","description":"Purges the contents of the Connection Manager.","descriptor":{"names":[],"values":[]},"impact":"1","returnType":"java.lang.Void","signature":[{"name":"arg0","type":"java.lang.String","description":"Use 'abort' to abort all connections in the pool using Connection.abort(). Use 'immediate' to purge the pool contents immediately. Any other string value will purge the pool contents normally.","descriptor":{"names":[],"values":[]}}],"URL":"/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/purgePoolContents"},{"name":"showPoolContents","description":"Displays the current contents of the Connection Manager in a human readable format.","descriptor":{"names":[],"values":[]},"impact":"0","returnType":"java.lang.String","signature":[],"URL":"/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/showPoolContents"}]}
+{
+  "className": "com.ibm.ws.jca.cm.mbean.ConnectionManagerMBean",
+  "description": "MBean for a Connection Manager",
+  "descriptor": {
+    "names": [],
+    "values": []
+  },
+  "attributes": [],
+  "attributes_URL": "/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BPdprofDataSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/attributes",
+  "constructors": [],
+  "notifications": [],
+  "operations": [
+    {
+      "name": "purgePoolContents",
+      "description": "Purges the contents of the Connection Manager.",
+      "descriptor": {
+        "names": [],
+        "values": []
+      },
+      "impact": "1",
+      "returnType": "java.lang.Void",
+      "signature": [
+        {
+          "name": "arg0",
+          "type": "java.lang.String",
+          "description": "Use 'abort' to abort all connections in the pool using Connection.abort(). Use 'immediate' to purge the pool contents immediately. Any other string value will purge the pool contents normally.",
+          "descriptor": {
+            "names": [],
+            "values": []
+          }
+        }
+      ],
+      "URL": "/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BPdprofDataSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/purgePoolContents"
+    },
+    {
+      "name": "showPoolContents",
+      "description": "Displays the current contents of the Connection Manager in a human readable format.",
+      "descriptor": {
+        "names": [],
+        "values": []
+      },
+      "impact": "0",
+      "returnType": "java.lang.String",
+      "signature": [],
+      "URL": "/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BPdprofDataSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/showPoolContents"
+    }
+  ]
+}
 ```
 
 Try to get showPoolContents (You need to use curl command to post data)
 
 ```
 curl -k -u wsadmin:passw0rd  -H "Content-Type: application/json" -d "{}" https://localhost:9443/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/showPoolContents
+
+```
+
+```
+./showPoolContents.sh
 ```
 
 Try to do purgePoolContents
 
+```
+curl -k -u wsadmin:passw0rd  -H "Content-Type: application/json" -d '@abort.json' https://localhost:9443/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3DdataSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBean/operations/purgePoolContents
+```
+
+```abort.json
+{
+  "params":[ 
+      {  
+        "value" : "abort", 
+        "type" : "java.lang.String" 
+      } 
+   ], 
+  "signature":[ 
+      "java.lang.String" 
+   ] 
+}
+```
 
 ```
- curl -k -u wsadmin:passw0rd  -H "Content-Type: application/json" -d '{"arg0":
-"immediate"}' https://localhost:9443/IBMJMXConnectorREST/mbeans/WebSphere%3AjndiName%3Djdbc%2FderbyEmbedded%2Cname%3Ddat
-aSource%5BDefaultDetaSource%5D%2FconnectionManager%5Bdefault-0%5D%2Ctype%3Dcom.ibm.ws.jca.cm.mbean.ConnectionManagerMBea
-n/operations/purgePoolContents
-{"value":null,"type":null}
+./purgePoolContents.sh
 ```
 
 
