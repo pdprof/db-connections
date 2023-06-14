@@ -5,5 +5,5 @@ if [ -z $ACCESS_HOST ]; then
 fi
 date 
 echo "***** Get MBeans *****"
-curl -s -k -u wsadmin:passw0rd https://localhost:9443/IBMJMXConnectorREST/mbeans | jq .
+curl -s -k -u wsadmin:passw0rd https://${ACCESS_HOST}:9443/IBMJMXConnectorREST/mbeans | jq .
 

@@ -11,7 +11,7 @@ Access to following URL by your browser
 
 - http://localhost:9080/db.connections/db
 
-![db](db.png)
+![db](../mustgather-connections-1/db.png)
 
 Please use buttons to test database operation you wanted
 
@@ -24,7 +24,7 @@ Access to following URL by your browser
 
 - http://localhost:9080/db.connections/script
 
-![script](script.png)
+![script](../mustgather-connections-1/script.png)
 
 Please use populate button to get scripts with your expected options
 
