@@ -55,5 +55,20 @@ LinkedHashMap<String, Employee> employee = (LinkedHashMap<String, Employee>) req
 		}
 		%>
 	</table>
+	<hr>
+	Call JPA Action
+	<form action="employee" method="get">
+		<table>
+			<tr>
+				<td align="right">NAME:</td>
+				<td align="left"><input type="text" name="name" size="128"></input></td>
+			</tr>
+		</table>
+		<button name="action" value="insert">JPA Insert new NAME</button>
+
+	</form>
+	<a href="employee">
+   		<button>JPA Get list</button>
+	</a>
 </body>
 </html>
