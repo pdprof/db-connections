@@ -13,6 +13,7 @@ LinkedHashMap<String, Employee> employee = (LinkedHashMap<String, Employee>) req
 <title>EMPLOYEE table operation</title>
 </head>
 <body>
+    <h1>JDBC DataSource Test</h1>
 	<form action="db" method="get">
 		<button name="action" value="init">Recreate Table</button>
 		</br>
@@ -56,7 +57,7 @@ LinkedHashMap<String, Employee> employee = (LinkedHashMap<String, Employee>) req
 		%>
 	</table>
 	<hr>
-	Call JPA Action
+	<h1>JPA Action Test</h1>
 	<form action="employee" method="get">
 		<table>
 			<tr>

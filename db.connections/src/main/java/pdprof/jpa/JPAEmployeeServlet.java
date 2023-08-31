@@ -79,4 +79,11 @@ public class JPAEmployeeServlet extends HttpServlet {
 		em.getTransaction().commit();
 	}
 
+	@Override
+	public void destroy() {
+		em.close();
+		emf.close();
+		super.destroy();
+	}
+
 }
