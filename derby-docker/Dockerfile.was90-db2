@@ -1,0 +1,7 @@
+FROM ibmcom/websphere-traditional:9.0.5.14
+ENV ENABLE_BASIC_LOGGING=true
+COPY lib/db2jcc4.jar /tmp/db2jcc4.jar
+COPY was90/PASSWORD /tmp/PASSWORD
+COPY --chown=was:root apps/db.connections.war /work/config/
+COPY --chown=was:root was90/installApp.py.custom /work/config/installApp.py
+RUN /work/configure.sh
