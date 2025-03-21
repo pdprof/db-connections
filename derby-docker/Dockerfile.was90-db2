@@ -1,4 +1,4 @@
-FROM ibmcom/websphere-traditional:9.0.5.14
+FROM ibmcom/websphere-traditional:9.0.5.20
 ENV ENABLE_BASIC_LOGGING=true
 COPY lib/db2jcc4.jar /tmp/db2jcc4.jar
 COPY was90/PASSWORD /tmp/PASSWORD
