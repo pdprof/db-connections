@@ -127,6 +127,7 @@ public class DBServlet extends HttpServlet {
 
 	private boolean dropTable(Connection con) throws SQLException {
 		con.createStatement().executeUpdate("drop table EMPLOYEE");
+		con.createStatement().executeUpdate("drop table TMPLOYEE");
 		return true;
 	}
 
@@ -134,12 +135,17 @@ public class DBServlet extends HttpServlet {
 		DatabaseMetaData meta = con.getMetaData();
 		if (meta.getDatabaseProductName().equalsIgnoreCase("MySQL")) {
 			con.createStatement().executeUpdate("create table EMPLOYEE (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(128))");
+			con.createStatement().executeUpdate("create table TMPLOYEE (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(128))");
 		} else {
 			con.createStatement().executeUpdate(
 					"create table EMPLOYEE (id INTEGER PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), name VARCHAR(128))");
+			con.createStatement().executeUpdate(
+					"create table TMPLOYEE (id INTEGER PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), name VARCHAR(128))");
 		}
 		con.createStatement()
 				.executeUpdate("insert into EMPLOYEE (name) VALUES ('Taro Suzuki'), ('Hanko Sato'), ('Sora Yamada')");
+		con.createStatement()
+			.executeUpdate("insert into TMPLOYEE (name) VALUES ('Taro Suzuki'), ('Hanko Sato'), ('Sora Yamada')");
 		return true;
 	}
 
