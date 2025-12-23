@@ -15,7 +15,7 @@
 
     <eventLogging logMode="entryExit" minDuration="1ms"/>
 
-    <requestTiming slowRequestThreshold="5s" hungRequestThreshold="10m">
+    <requestTiming slowRequestThreshold="5s" hungRequestThreshold="3m" interruptHungRequests="true">
     </requestTiming>
 
     <logging  traceSpecification="com.ibm.ws.session.*=all:com.ibm.ws.webcontainer*=all:com.ibm.wsspi.webcontainer*=all:RRA=all:WAS.j2c=all:com.ibm.ws.jdbc.*=all:Transaction=all:ConnLeakLogic=all:jmx.rest.server.connector=all:com.ibm.ws.jmx.connector.server.rest.*=all"
@@ -42,7 +42,7 @@
     <library filesetRef="Db2Files" id="Db2Lib"/>
     <jdbcDriver id="Db2Driver" libraryRef="Db2Lib"/>
     <!-- jndiName derby is from original application which is developed with derby. -->
-    <dataSource id="PdprofDataSource" jdbcDriverRef="Db2Driver" jndiName="jdbc/derbyEmbedded" type="javax.sql.DataSource">
+    <dataSource id="PdprofDataSource" jdbcDriverRef="Db2Driver" jndiName="jdbc/derbyEmbedded" type="javax.sql.XADataSource" queryTimeout="112s" syncQueryTimeoutWithTransactionTimeout="false">
         <connectionManager maxPoolSize="5" minPoolSize="2"/>
         <properties.db2.jcc databaseName="PDPROF" 
                       serverName="localhost" portNumber="50000"
@@ -51,6 +51,8 @@
 
     <httpSessionDatabase dataSourceRef="PdprofDataSource" id="SessionDB"/>
     <httpSession cloneId="${env.HOSTNAME}" storageRef="SessionDB"/>
+
+    <transaction totalTranLifetimeTimeout="120s" />
 
     <webApplication id="db.connections" location="db.connections.war" name="db.connections"/>
 </server>
