@@ -54,5 +54,15 @@
 
     <transaction totalTranLifetimeTimeout="120s" />
 
-    <webApplication id="db.connections" location="db.connections.war" name="db.connections"/>
+    <enterpriseApplication id="datasource" location="datasource.ear" name="datasource">
+    	<application-bnd>
+    		<security-role name="admin-role">
+    			<user name="wsadmin"/>
+    		</security-role>
+    	</application-bnd>
+    </enterpriseApplication>
+    
+    <!-- Disable verifyHostname to use restConnector -->
+    <ssl id="defaultSSLConfig" verifyHostname="false"/>
+
 </server>

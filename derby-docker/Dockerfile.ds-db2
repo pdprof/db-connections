@@ -17,6 +17,6 @@ COPY --chown=1001:0 lib/db2jcc4.jar /output/resources/db2
 # COPY --chown=1001:0 trapit /config/
 COPY --chown=1001:0 config/server.xml /config/
 COPY --chown=1001:0 config/jvm.options /config/
-COPY --chown=1001:0 apps/db.connections.war /config/apps/
+COPY --chown=1001:0 apps/datasource.ear /config/apps/
 
 USER 1001

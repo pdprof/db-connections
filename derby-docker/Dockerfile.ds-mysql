@@ -29,6 +29,6 @@ RUN tar zxvf /output/resources/mysql-connector-java-8.0.30.tar.gz -C /output/res
 # COPY --chown=1001:0 trapit /config/
 COPY --chown=1001:0 config/server.xml /config/
 COPY --chown=1001:0 config/jvm.options /config/
-COPY --chown=1001:0 apps/db.connections.war /config/apps/
+COPY --chown=1001:0 apps/datasource.ear /config/apps/
 
 USER 1001
